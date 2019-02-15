@@ -51,19 +51,19 @@ class Casino
     when 1 # Roulette
       @wallet = Roullette.new(@wallet)
 
-    when 2 # Black Jack
+    when 2 # Black Jack - Josh
       @wallet = BlackJack.new(@wallet)
-    when 3 # Slots
+    when 3 # Slots - Thanh
       @wallet = Slots.new(@wallet)
-    when 4 # Dice
+    when 4 # Dice - AJ
       @wallet = Dice.new(@wallet)
-    when 5 # Horse Races
+    when 5 # Horse Races - Jake
       @wallet = HorseRaces.new(@wallet)
     end
   end
 
   def repeat_menu
-    #TBD
+    
   end
 
 
