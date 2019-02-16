@@ -1,6 +1,9 @@
 require "pry"
 require "colorize"
+
 require_relative "roulette"
+require_relative "dice"
+require_relative "player"
 
 
 class Casino
@@ -29,7 +32,9 @@ class Casino
     puts "How much money do you want to add to your wallet today?"
     print "> $"
     @wallet = gets.to_i
+
     puts "\nGreat, let's get started!"
+
     sleep(1)
   end
 
@@ -115,5 +120,4 @@ class Casino
   end
 end
 
-#
 Casino.new
