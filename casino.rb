@@ -1,6 +1,7 @@
 require "pry"
 require "colorize"
-
+require_relative "dice"
+require_relative "player"
 
 class Casino
   def initialize
@@ -34,11 +35,13 @@ class Casino
     @name = gets.strip
     puts "How much money do you want to add to your wallet today?"
     @wallet = gets.to_i
+    @player = Player.new(@name, @wallet)
     puts "Great, let's get started!"
     sleep(1)
   end
 
   def display_main_menu
+    puts "You have $#{@wallet}."
     puts "-----------------------"
     puts "Main Menu:"
     puts "1)Roulette"
@@ -49,16 +52,15 @@ class Casino
     choice = gets.to_i
     case choice
     when 1 # Roulette
-      @wallet = Roullette.new(@wallet)
-
+      Roullette.new(@player)
     when 2 # Black Jack
-      @wallet = BlackJack.new(@wallet)
+      BlackJack.new(@player)
     when 3 # Slots
-      @wallet = Slots.new(@wallet)
+      Slots.new(@player)
     when 4 # Dice
-      @wallet = Dice.new(@wallet)
+      Dice.new(@player)
     when 5 # Horse Races
-      @wallet = HorseRaces.new(@wallet)
+      HorseRaces.new(@player)
     end
   end
 
@@ -70,10 +72,11 @@ class Casino
 end
 
 # class Roullette
-#   # attr_accessor :wallet
+#   # attr_accessor :player
   
-#   def initialize(wallet_of_this_game)
-#     @wallet_of_this_game = wallet_of_this_game
+#   def initialize(player)
+#     @player = player
+#     @wallet_game = player.wallet
 #   end
 
 #   def spin_the_wheel
@@ -84,7 +87,7 @@ end
 #   end
 
 #   def cash_out
-#     return @wallet_of_this_game = @wallet_of_this_game + 5
+#     player.wallet = @wallet_game
 #   end
 # end
 
