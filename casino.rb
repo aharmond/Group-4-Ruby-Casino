@@ -2,6 +2,7 @@ require "pry"
 require "colorize"
 require_relative "dice"
 require_relative "player"
+require_relative "horse_races"
 
 class Casino
   def initialize
