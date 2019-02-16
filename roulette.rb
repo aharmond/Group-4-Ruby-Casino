@@ -40,6 +40,7 @@ class Roulette
         @bet_options[index] = number.to_s
       end
     
+      
  
     end
 
@@ -111,10 +112,39 @@ class Roulette
       @bet_array.each_with_index do |bet,index|
         if bet.bet_option == @winning_number
           puts "You won!"
-          winnings_amount = bet.bet_amount * 34
+          winnings_amount += bet.bet_amount * 34
           bet_lost_flag = false
         end
+
+        # binding.pry
+
+        case bet.bet_option
+        when "even"
+          if @winning_number.to_i % 2 == 0
+            puts "You won!"
+            winnings_amount += bet.bet_amount * 2
+            bet_lost_flag = false
+          end
+        when "odd"
+          if @winning_number.to_i % 2 == 1
+            puts "You won!"
+            winnings_amount += bet.bet_amount * 2
+            bet_lost_flag = false
+          end
+        when "red"
+          if @win
+        when "black"
+        when "1-18"
+        when "19-36"
+        when "1-12"
+        when "13-24"
+        when "25-36"
+        end
+
       end
+
+      # Check each bet with the winning number
+      @bet
       # binding.pry
 
       
@@ -145,7 +175,7 @@ class Roulette
       choice = gets.to_i
       case choice
       when 1
-        initialize
+        initialize(@wallet)
       when 2
         cash_out
       else
@@ -180,4 +210,4 @@ class Bet
   end
 end
   
-# Roulette.new()
+Roulette.new(10)
