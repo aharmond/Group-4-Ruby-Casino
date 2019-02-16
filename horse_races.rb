@@ -4,7 +4,6 @@ class HorseRaces
     def initialize(player)
         @player = player
         @wallet_horses = player.wallet
-        @winnings = 0
         # pass wallet from Casino.rb to get starting value for @wallet_horses
         @horses = ["Secratariat", "Man o' War", "California Chrome", "Preakness", "Seattle Slew", "Whirlaway"]  
         puts "Welcome to the Horse Races!"
@@ -48,22 +47,21 @@ class HorseRaces
             puts "Invalid choice"
             betting
         end
-        if @wallet_horses - @winnings.abs > 0
+        if @wallet_horses  > 0
             puts "Now, how much do you want to bet? Our minimum bet is $1"
             bet = gets.to_i
 
             if @selected_horse == @winning_horse
                 # win
-                @winnings += bet + bet * odds
+                @wallet_horses += bet + bet * odds
                 puts "You won!"
-                puts "You have #{@wallet_horses - @winnings} left to bet with"
+                puts "You have #{@wallet_horses} left to bet with"
                 menu_two
             else
                 # lose
-                @winnings -= bet
+                @wallet_horses -= bet
                 puts "You lose!"
-                puts "You lost $#{@winnings.abs} so far"
-                puts "You have $#{@wallet_horses - @winnings.abs} left to bet with"
+                puts "You have $#{@wallet_horses} left to bet with"
                 menu_two
             end
         else
@@ -90,7 +88,7 @@ class HorseRaces
 
     def return_to_casino 
         # should return the starting value +/- winnings
-        @player.wallet = @wallet_horses + @winnings
+        @player.wallet = @wallet_horses
         # binding.pry
     end
 
