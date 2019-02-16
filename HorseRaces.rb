@@ -1,4 +1,4 @@
-require "pry"
+# require "pry"
 class HorseRaces
 
     def initialize(wallet)
@@ -7,7 +7,7 @@ class HorseRaces
         # pass wallet from Casino.rb to get starting value for @wallet
         @horses = ["Secratariat", "Man o' War", "California Chrome", "Preakness", "Seattle Slew", "Whirlaway"]  
         puts "Welcome to the Horse Races!"
-        puts "Here are the horses in the upcoming race"     
+        puts "Here are the horses in the upcoming race"   
         select_horse
     end
 
@@ -92,5 +92,5 @@ class HorseRaces
 
 end
 
-game = HorseRaces.new(200)
+# game = HorseRaces.new(200)
 
