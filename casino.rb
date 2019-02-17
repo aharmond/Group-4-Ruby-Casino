@@ -6,7 +6,11 @@ require_relative "dice"
 require_relative "player"
 require_relative "horse_races"
 
-
+    # Requirements for every game:
+    # - Don't let the user keep playing if they are out of money
+    # - Must return the current wallet amount (int)
+    # - Minimum bet is $1
+    # - Constantly display wallet amount, each round of the game
 class Casino
   def initialize
     # Welcome Message
@@ -33,7 +37,7 @@ class Casino
     puts "How much money do you want to add to your wallet today?"
     print "> $"
     @wallet = gets.to_i
-
+    @player = Player.new(@name, @wallet)
     puts "\nGreat, let's get started!"
 
     sleep(1)
@@ -61,15 +65,15 @@ class Casino
     choice = gets.to_i
     case choice
     when 1 # Roulette
-      Roulette.new(@wallet)
-    when 2 # Black Jack - Josh
-      @wallet = BlackJack.new(@wallet)
-    when 3 # Slots - Thanh
-      @wallet = Slots.new(@wallet)
-    when 4 # Dice - AJ
-      @wallet = Dice.new(@wallet)
-    when 5 # Horse Races - Jake
-      @wallet = HorseRaces.new(@wallet)
+      Roulette.new(@player)
+    when 2 # Black Jack
+      BlackJack.new(@player)
+    when 3 # Slots
+      Slots.new(@player)
+    when 4 # Dice
+      Dice.new(@player)
+    when 5 # Horse Races
+      HorseRaces.new(@player)
     when 6
       repeat_menu
     else
