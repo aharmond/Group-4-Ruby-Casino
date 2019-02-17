@@ -1,18 +1,19 @@
 class BlackJack
-  attr_accessor :@player
-  def initialize(@player.wallet)
+  attr_accessor :player
+  def initialize(player)
+    @player = player
     @bjmoney = @player.wallet
     bet
   end
 
   def bet
-    puts "Welcome to BlackJack #{@player.net}"
+    puts "Welcome to BlackJack #{@player.name}"
     puts "You have #{@bjmoney} dollars"
     puts "How much would you like to bet? (or bet 0 to return to games menu)"
     @bet = gets.to_i
     case @bet
-    when "0"
-      exit
+    when 0
+      back_tomenu
     when
       @bet > @bjmoney
       puts "You don't have enough money"
@@ -46,7 +47,7 @@ class BlackJack
     finalnumber = @playerrunning
     finalnumberd = @dealerrunning
     case
-    when finalnumberd > 21
+    when finalnumber == 21
       puts "YOU WIN!!!"
         @bjmoney = @bjmoney + @bet
         bet
@@ -54,17 +55,13 @@ class BlackJack
         puts "YOU LOSE!"
         @bjmoney = @bjmoney - @bet
         bet
-      when finalnumber == 21, finalnumber > finalnumberd
+      when finalnumberd > 21
         puts "YOU WIN!!!"
         @bjmoney = @bjmoney + @bet
         bet
-      when finalnumber < finalnumberd
+      when finalnumberd > finalnumber
         puts "YOU LOSE!"
         @bjmoney = @bjmoney - @bet
-        bet
-      when finalnumber > finalnumberd
-        puts "YOU WIN!!!"
-        @bjmoney = @bjmoney + @bet
         bet
       else
       end
@@ -75,6 +72,18 @@ class BlackJack
       @dealerrunning = @dealerrunning + rand(1..11)
       @playerrunning = @playerrunning + rand(1..11)
       game
+    end
+
+    def back_tomenu
+      puts "Are you sure you want to leave BlackJack? (y/n)"
+      choice = gets.strip.downcase
+      if choice = "y"
+        return
+      else
+        puts "---"
+        bet
+      end
+
     end
 end
    # if 
