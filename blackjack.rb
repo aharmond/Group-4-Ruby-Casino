@@ -54,6 +54,9 @@ class BlackJack
     else
     end
     case
+    when finalnumber == finalnumberd
+      puts "Tie"
+      bet
     when finalnumber == 21
       puts "YOU WIN!!!"
         @bjmoney = @bjmoney + @bet
@@ -76,7 +79,6 @@ class BlackJack
         bet
       else
       end
-      bet
     end
 
     def hit
@@ -118,80 +120,5 @@ class BlackJack
 
     end
 
-    
-end
-   # if 
-   #   @bet == 0
-   #   exit
-   # else
-   #   game
-   # end
   
-
-
-  # puts "Do you want to add another card (type y or n)"
- # choice = gets.strip.downcase
- # if 
- #   choice == "y"
- #    @dealerrunning.push(rand(1..10))
- #    puts sum(@dealerrunning)
- #    @playerrunning.push(rand(1..10))
- #    puts sum(@playerrunning)
- # else
- #   exit
-
-
-  #def @playercardtotal
-  #end
-
-  #def dealer
-    #puts "The dealer puts a #{} on the table"
-    #if 
-     # card > 21
-     # playerwin
-    #else
-      
-
-  #end
-
-  #def playerwin
-  #end
-
-  #def playerlose
-  #end
-
-
-  #case newtotal
-  #when == 21
-  #  playerlose
-  #when > 21
-  #  playerwin
-  #when 
-
-
- # def @dealercardtotal
-   # total = rand(1..10)
-   # newtotal = total + rand(1..10)
-  #  case newtotal
- #   when == 21
-#      playerlose
-    #when > 21
-   #   playerwin
-  #  when 
-
- # end
-#end
-#@dealerrunning = []
-#@playerrunning = []
-
-#scoring
-    #if 
-    #  @dealerrunning == true
-    #  puts "playerlose"
-    #else
-    #end
-    #if
-    #  @dealerrunning = true
-    #  puts "playerwin"
-    #else
-    #end
+end
