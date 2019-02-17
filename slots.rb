@@ -18,8 +18,10 @@ class Slots
     when 1
       slots_game
     when 2
-      # Wallet with viewing budget, adding money and cashing out options
+      repeat_menu
+      #Access to wallet to see available budget or add more money
     when 3
+      display_main_menu
       # Return to Main Menu
     when 4
       exit
@@ -44,8 +46,10 @@ class Slots
         when 1
           slots_game
         when 2
-          # Wallet with viewing budget, adding money and cashing out options
+          repeat_menu
+          #Access to wallet to see available budget or add more money
         when 3
+          display_main_menu
           # Return to Main Menu
         else
           puts "Invalid choice. Try again"
@@ -67,6 +71,7 @@ class Slots
     else
       puts "You don't have enough money."
       sleep(1)
+      display_main_menu
       # Return to Main Menu
     end
   end
@@ -95,6 +100,7 @@ class Slots
       when 1
         slots_game
       when 2
+        display_main_menu
         # Return to Main Menu
       else
         puts "Invalid choice. Try again"
