@@ -8,27 +8,33 @@ class Slots
     slots_menu
   end
   def slots_menu
+    puts `clear`
     puts "------------------------------------".colorize(:red)
-    puts "Welcome to Lucky Money Slot Machine!".colorize(:red)
+    puts "Welcome to Jedi Academy Slot Machine!".colorize(:red)
     puts "1) Start a new game".colorize(:green)
     puts "2) Additional Options".colorize(:green)
     puts "3) Quit".colorize(:green)
     choice = gets.to_i
     case choice
     when 1
+      puts `clear`
       slots_game
     when 2
+      puts `clear`
       return_main_menu
     when 3
       exit
     else
       puts "Invalid choice. Try again!".colorize(:red)
+      sleep(1)
+      puts `clear`
       slots_menu
     end
   end
 
   def slots_game
     if @wallet_slots > 0
+      puts "You have $#{@wallet_slots}.".colorize(:green)
       puts "Place your bet (min $1): ".colorize(:green)
       @slots_bet = gets.to_i
       if @slots_bet > @wallet_slots
@@ -39,18 +45,26 @@ class Slots
         choice = gets.to_i
         case choice
         when 1
+          puts `clear`
           slots_game
         when 2
+          puts `clear`
           return_main_menu
         else
           puts "Invalid choice. Try again".colorize(:red)
+          sleep(1)
+          puts `clear`
           slots_menu
         end
       else
         puts "Spinning...".colorize(:blue)
-        sleep(2)
-        puts result = rand(1..30).to_i
         sleep(1)
+        puts "Still spinning...".colorize(:blue)
+        sleep(2)
+        puts "Patience you must have, my young Padawan!".colorize(:blue)
+        sleep(3)
+        puts result = rand(1..30).to_i
+        sleep(2)
         if result == 19
           win
         else
@@ -67,7 +81,7 @@ class Slots
   end
 
   def win
-    @wallet_slots += @slots_bet
+    @wallet_slots += @slots_bet * 3
     puts "YOU WIN!".colorize(:green)
     puts "Your wallet now has $#{@wallet_slots}.".colorize(:green)
     puts "Congrats!".colorize(:green)
@@ -88,11 +102,15 @@ class Slots
     choice = gets.to_i
     case choice
       when 1
+        puts `clear`
         slots_game
       when 2
+        puts `clear`
         return_main_menu
       else
         puts "Invalid choice. Try again".colorize(:red)
+        sleep(1)
+        puts `clear`
         slots_menu
     end
   end
