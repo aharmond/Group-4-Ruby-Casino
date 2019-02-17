@@ -31,7 +31,7 @@ class Roulette
           @roulette_wheel[index] = number.to_s
       end
 
-      @bet_options = ["00","red","black","odd","even","1-18",
+      @bet_options = ["Any Single Number","00","red","black","odd","even","1-18",
         "19-36","1-12","13-24","25-36"]
       @bet_options.push((0..36).to_a)
       @bet_options.flatten!
@@ -39,7 +39,9 @@ class Roulette
       @bet_options.each_with_index do |number,index|
         @bet_options[index] = number.to_s
       end
-    
+      
+      @red = [1,3,5,7,9,12,14,16,18,19,21,23,25,27,30,32,34,36]
+      @black = [2,4,6,8,10,11,13,15,17,20,22,24,26,28,29,32,33,35]
       
  
     end
@@ -48,8 +50,21 @@ class Roulette
     def place_bets
       @roulette_wheel
       puts "\n-----------------------"
-      puts "Your wallet currently has $#{@wallet}\n"
+      puts "Your wallet currently has $#{@wallet}\n".colorize(:blue)
       puts "What do you want to bet on?"
+      puts "Your options are: "
+      # binding.pry
+
+      # Loop through and print bet options
+      i = 0
+      while i < 10
+        print @bet_options[i]      
+        print ", "
+        i = i + 1
+      end
+      puts @bet_options[10] # prints final value w/o comma
+      
+      # Asks user for how much they would like to place on that particular bet
       print "> "
       bet_option = gets.strip.downcase
       puts "And how much do you want to bet on that?"
@@ -58,7 +73,7 @@ class Roulette
       
       # Tests whether user has enough funds to make the bet
       if bet_amount > @wallet
-        puts "Not enough funds!"
+        puts "Not enough funds in your wallet!"
         puts "Try a different bet amount, or exit."
       else # Saves the bet, and withdraws funds from wallet
         @bet_array.push(Bet.new(bet_option,bet_amount))
@@ -78,6 +93,8 @@ class Roulette
       when "y"
         place_bets
       when "n"
+        puts "All Bets In."
+        sleep(1)
         return
       else
         puts "Invalid Choice"
@@ -88,17 +105,29 @@ class Roulette
 
     # Allows user to spin the wheel
     def spin_the_wheel
-      puts "All Bets In"
-      puts "To spin the wheel, press 'Enter'."
-      print "> "
+      puts "\n-----------------------"
+      puts "To spin the wheel, press 'Enter'"
+      # print "> "
+      choice = gets.to_s
+      if choice == "\n"
+        @winning_number = roulette_wheel.sample
+        spin_loop(5)
+        puts "The ball landed on: #{@winning_number}!\n"
+        sleep(1)
+      else
+        puts "Invalid, try again"
+        spin_the_wheel
+      end
+      # binding.pry
       #TBD
 
-      @winning_number = roulette_wheel.sample
-      
-      # DEBUG
-      # @winning_number = "5" 
+    end
 
-      puts "The ball landed on: #{@winning_number}!\n"
+    def spin_loop(number_of_iterations)
+      for i in 1..number_of_iterations do
+        puts "."
+        sleep(0.5)
+      end
     end
 
 
@@ -111,46 +140,78 @@ class Roulette
       #check whether the number is 
       @bet_array.each_with_index do |bet,index|
         if bet.bet_option == @winning_number
-          puts "You won!"
           winnings_amount += bet.bet_amount * 34
+          puts "Winning number is #{winning_number}, you won!".colorize(String.colors.sample)
           bet_lost_flag = false
         end
-
-        # binding.pry
 
         case bet.bet_option
         when "even"
           if @winning_number.to_i % 2 == 0
-            puts "You won!"
+            puts "Winning number is even, ou won!".colorize(String.colors.sample)
             winnings_amount += bet.bet_amount * 2
             bet_lost_flag = false
           end
         when "odd"
           if @winning_number.to_i % 2 == 1
-            puts "You won!"
+            puts "Winning number is odd, ou won!".colorize(String.colors.sample)
             winnings_amount += bet.bet_amount * 2
             bet_lost_flag = false
           end
         when "red"
-          if @win
+          if @red.include?(@winning_number.to_i)
+            puts "Winning number is red, you won!".colorize(String.colors.sample)
+            winnings_amount += bet.bet_amount * 2
+            bet_lost_flag = false
+          end
         when "black"
+          if @black.include?(@winning_number.to_i)
+            puts "Winning number is black, you won!".colorize(String.colors.sample)
+            winnings_amount += bet.bet_amount * 2
+            bet_lost_flag = false
+          end
         when "1-18"
+          if @winning_number.to_i <= 18
+            puts "Winning number is between 1 and 18, you won!".colorize(String.colors.sample)
+            winnings_amount += bet.bet_amount * 2
+            bet_lost_flag = false
+          end
         when "19-36"
+          if @winning_number.to_i > 18
+            puts "Winning number is between 19 and 36, you won!".colorize(String.colors.sample)
+            winnings_amount += bet.bet_amount * 2
+            bet_lost_flag = false
+          end
         when "1-12"
+          if @winning_number.to_i <= 12
+            puts "Winning number is between 1 and 12, you won!".colorize(String.colors.sample)
+            winnings_amount += bet.bet_amount * 3
+            bet_lost_flag = false
+          end
         when "13-24"
+          if @winning_number.to_i > 12 && @winning_number <= 24
+            puts "Winning number is between 13 and 24, you won!".colorize(String.colors.sample)
+            winnings_amount += bet.bet_amount * 3
+            bet_lost_flag = false
+          end
         when "25-36"
+          if @winning_number.to_i > 24 && @winning_number <= 36
+            puts "Winning number is between 25 and 36, you won!".colorize(String.colors.sample)
+            winnings_amount += bet.bet_amount * 3
+            bet_lost_flag = false
+          end
         end
 
       end
 
-      # Check each bet with the winning number
-      @bet
-      # binding.pry
-
       
       if bet_lost_flag
         puts "Sorry, you did not win anything!"
+      else
+        puts "For this game, you won $#{winnings_amount}!".colorize(String.colors.sample)
       end
+
+      sleep(1)
 
       # Adds winnings to user's wallet
       add_winnings(winnings_amount)
@@ -166,8 +227,10 @@ class Roulette
 
 
     def repeat_game
+      sleep(1)
       puts "\n-----------------------"
       puts "You currently have $#{@wallet} left.".colorize(:blue)
+      sleep(1)
       puts "What would you like to do next?"
       puts "1) Play Again"
       puts "2) Cash Out"
@@ -175,11 +238,15 @@ class Roulette
       choice = gets.to_i
       case choice
       when 1
+        sleep(1)
         initialize(@wallet)
       when 2
+        puts "Goodbye!"
+        sleep(1)
         cash_out
       else
         puts "invalid entry, try again"
+        sleep(1)
         repeat_game
       end      
     end
@@ -209,5 +276,6 @@ class Bet
     @bet_amount = bet_amount
   end
 end
-  
+
+
 Roulette.new(10)
