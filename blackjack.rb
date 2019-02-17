@@ -1,44 +1,89 @@
-
 class BlackJack
-  attr_accessor :start
-
-  def initialize
-   # pullwallet
-    start
+  attr_accessor :player
+  def initialize(player)
+    @player = player
+    @bjmoney = @player.wallet
+    bet
   end
 
-  def pullwallet
-   # @blackjackwallet = @wallet
-  end
-
-  def game
-    dealerrunning = (rand(1..10))
-    playerrunning = (rand(1..10))
-    puts "The dealer flipped this card"
-    puts dealerrunning
-    puts "You flipped this card"
-    puts playerrunning
-    if 
-      dealerrunning < playerrunning
-      puts "YOU WIN!"
-    #  @blackjackwallet = @blackjackwallet + @bet
-
-    else
-      puts "YOU LOSE"
-    #  @blackjackwallet = @blackjackwallet - @bet
-    end
-    puts "THank you for playing"
-  end
-
-  def start
-    puts "Welcome to Black Jack!"
-    puts "Get ready to lose all your money"
-    puts @wallet
+  def bet
+    puts "Welcome to BlackJack #{@player.name}"
+    puts "You have #{@bjmoney} dollars"
     puts "How much would you like to bet? (or bet 0 to return to games menu)"
-  
     @bet = gets.to_i
+    case @bet
+    when 0
+      back_tomenu
+    when
+      @bet > @bjmoney
+      puts "You don't have enough money"
+    else 
+      game_start
+    end
+  end
+
+  def game_start
+    @dealerrunning = rand(1..11)
+    @playerrunning = rand(1..11)
     game
   end
+  
+  def game
+    puts "The dealer's total of flipped cards is:"
+    puts @dealerrunning
+    puts "Your total of flipped cards is:"
+    puts @playerrunning
+    puts "Would you like to add a card (y/n)?"
+    newcard = gets.strip.downcase
+    if 
+      newcard == "y"
+      hit
+    else
+      result
+    end
+  end
+
+   def result
+    finalnumber = @playerrunning
+    finalnumberd = @dealerrunning
+    case
+    when finalnumber == 21
+      puts "YOU WIN!!!"
+        @bjmoney = @bjmoney + @bet
+        bet
+      when finalnumber > 21
+        puts "YOU LOSE!"
+        @bjmoney = @bjmoney - @bet
+        bet
+      when finalnumberd > 21
+        puts "YOU WIN!!!"
+        @bjmoney = @bjmoney + @bet
+        bet
+      when finalnumberd > finalnumber
+        puts "YOU LOSE!"
+        @bjmoney = @bjmoney - @bet
+        bet
+      else
+      end
+      bet
+    end
+
+    def hit
+      @dealerrunning = @dealerrunning + rand(1..11)
+      @playerrunning = @playerrunning + rand(1..11)
+      game
+    end
+
+    def back_tomenu
+      puts "Are you sure you want to leave BlackJack? (y/n)"
+      choice = gets.strip.downcase
+      if choice = "y"
+      else
+        puts "---"
+        bet
+      end
+
+    end
 end
    # if 
    #   @bet == 0

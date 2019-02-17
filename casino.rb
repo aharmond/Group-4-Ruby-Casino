@@ -6,6 +6,7 @@ require_relative "dice"
 require_relative "player"
 require_relative "horse_races"
 require_relative "slots"
+require_relative "blackjack"
 
     # Requirements for every game:
     # - Don't let the user keep playing if they are out of money
