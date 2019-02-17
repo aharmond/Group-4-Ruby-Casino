@@ -1,4 +1,5 @@
 require "pry"
+require "colorize"
 
 class Slots
   def initialize(player)
@@ -7,12 +8,12 @@ class Slots
     slots_menu
   end
   def slots_menu
-    puts "------------------------------------"
-    puts "Welcome to Lucky Money Slot Machine!"
-    puts "1) Start a new game"
-    puts "2) Access to wallet"
-    puts "3) Exit to Main Menu"
-    puts "4) Quit"
+    puts "------------------------------------".colorize(:red)
+    puts "Welcome to Lucky Money Slot Machine!".colorize(:red)
+    puts "1) Start a new game".colorize(:green)
+    puts "2) Access to wallet".colorize(:green)
+    puts "3) Exit to Main Menu".colorize(:green)
+    puts "4) Quit".colorize(:green)
     choice = gets.to_i
     case choice
     when 1
@@ -26,21 +27,21 @@ class Slots
     when 4
       exit
     else
-      puts "Invalid choice. Try again!"
+      puts "Invalid choice. Try again!".colorize(:red)
       slots_menu
     end
   end
 
   def slots_game
     if @wallet_slots > 0
-      puts "Place your bet (min $1): "
+      puts "Place your bet (min $1): ".colorize(:green)
       @slots_bet = gets.to_i
       if @slots_bet > @wallet_slots
-        puts "You only have $#{@wallet_slots}."
-        puts "Please choose:"
-        puts "1) Place lower bet"
-        puts "2) Access to wallet"
-        puts "3) Exit to Main Menu"
+        puts "You only have $#{@wallet_slots}.".colorize(:red)
+        puts "Please choose:".colorize(:red)
+        puts "1) Place lower bet".colorize(:green)
+        puts "2) Access to wallet".colorize(:green)
+        puts "3) Exit to Main Menu".colorize(:green)
         choice = gets.to_i
         case choice
         when 1
@@ -52,11 +53,11 @@ class Slots
           display_main_menu
           # Return to Main Menu
         else
-          puts "Invalid choice. Try again"
+          puts "Invalid choice. Try again".colorize(:red)
           slots_menu
         end
       else
-        puts "Spinning..."
+        puts "Spinning...".colorize(:blue)
         sleep(2)
         puts result = rand(1..30).to_i
         sleep(1)
@@ -69,7 +70,7 @@ class Slots
         sub_menu
       end
     else
-      puts "You don't have enough money."
+      puts "You don't have enough money.".colorize(:red)
       sleep(1)
       display_main_menu
       # Return to Main Menu
@@ -78,23 +79,23 @@ class Slots
 
   def win
     @wallet_slots += @slots_bet
-    puts "YOU WIN!"
-    puts "Your wallet now has $#{@wallet_slots}."
-    puts "Congrats!"
+    puts "YOU WIN!".colorize(:green)
+    puts "Your wallet now has $#{@wallet_slots}.".colorize(:green)
+    puts "Congrats!".colorize(:green)
   end
 
   def lose
     @wallet_slots -= @slots_bet
-    puts "YOU LOSE!"
-    puts "Your wallet now has $#{@wallet_slots}."
-    puts "Better luck next time!"
+    puts "YOU LOSE!".colorize(:green)
+    puts "Your wallet now has $#{@wallet_slots}.".colorize(:green)
+    puts "Better luck next time!".colorize(:green)
   end
 
   def sub_menu
-    puts "-----------------"
-    puts "Would you like to"
-    puts "1) Play again"
-    puts "2) Exit to Main Menu"
+    puts "-----------------".colorize(:red)
+    puts "Would you like to".colorize(:red)
+    puts "1) Play again".colorize(:green)
+    puts "2) Exit to Main Menu".colorize(:green)
     choice = gets.to_i
     case choice
       when 1
@@ -103,7 +104,7 @@ class Slots
         display_main_menu
         # Return to Main Menu
       else
-        puts "Invalid choice. Try again"
+        puts "Invalid choice. Try again".colorize(:red)
         slots_menu
     end
   end
