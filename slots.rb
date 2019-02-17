@@ -11,20 +11,15 @@ class Slots
     puts "------------------------------------".colorize(:red)
     puts "Welcome to Lucky Money Slot Machine!".colorize(:red)
     puts "1) Start a new game".colorize(:green)
-    puts "2) Access to wallet".colorize(:green)
-    puts "3) Exit to Main Menu".colorize(:green)
-    puts "4) Quit".colorize(:green)
+    puts "2) Additional Options".colorize(:green)
+    puts "3) Quit".colorize(:green)
     choice = gets.to_i
     case choice
     when 1
       slots_game
     when 2
-      repeat_menu
-      #Access to wallet to see available budget or add more money
+      return_main_menu
     when 3
-      display_main_menu
-      # Return to Main Menu
-    when 4
       exit
     else
       puts "Invalid choice. Try again!".colorize(:red)
@@ -40,18 +35,13 @@ class Slots
         puts "You only have $#{@wallet_slots}.".colorize(:red)
         puts "Please choose:".colorize(:red)
         puts "1) Place lower bet".colorize(:green)
-        puts "2) Access to wallet".colorize(:green)
-        puts "3) Exit to Main Menu".colorize(:green)
+        puts "2) Additional Options".colorize(:green)
         choice = gets.to_i
         case choice
         when 1
           slots_game
         when 2
-          repeat_menu
-          #Access to wallet to see available budget or add more money
-        when 3
-          display_main_menu
-          # Return to Main Menu
+          return_main_menu
         else
           puts "Invalid choice. Try again".colorize(:red)
           slots_menu
@@ -72,8 +62,7 @@ class Slots
     else
       puts "You don't have enough money.".colorize(:red)
       sleep(1)
-      display_main_menu
-      # Return to Main Menu
+      return_main_menu
     end
   end
 
@@ -95,18 +84,21 @@ class Slots
     puts "-----------------".colorize(:red)
     puts "Would you like to".colorize(:red)
     puts "1) Play again".colorize(:green)
-    puts "2) Exit to Main Menu".colorize(:green)
+    puts "2) Additional Options".colorize(:green)
     choice = gets.to_i
     case choice
       when 1
         slots_game
       when 2
-        display_main_menu
-        # Return to Main Menu
+        return_main_menu
       else
         puts "Invalid choice. Try again".colorize(:red)
         slots_menu
     end
+  end
+
+  def return_main_menu
+    @player.wallet = @wallet_slots
   end
 
 end
