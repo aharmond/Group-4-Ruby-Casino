@@ -84,7 +84,6 @@ class Roulette
       else # Saves the bet, and withdraws funds from wallet
         @bet_array.push(Bet.new(bet_option,bet_amount))
         @wallet -= bet_amount
-        binding.pry
       end
 
       continue_bets # Identifies whether the user wants to keep betting more
@@ -259,10 +258,7 @@ class Roulette
 
     # Cashes user out and exits the game
     def cash_out
-      # puts @wallet
-      binding.pry
       player.wallet = @wallet
-      binding.pry
     end
   end
 
@@ -283,6 +279,3 @@ class Bet
     @bet_amount = bet_amount
   end
 end
-
-# DEBUG
-# Roulette.new(10)

@@ -21,10 +21,8 @@ class Casino
     # List out the individual games (each is a class)
     display_main_menu
 
-    # Loops back through the menus for continual playing
-    # Allows the user to exit the application if they want to
-    repeat_menu
-
+    # At the end, the application loops back through the menus for continual playing
+    # It also allows the user to exit the application if they want to
   end
 
 
@@ -52,7 +50,7 @@ class Casino
   def display_main_menu
     puts "\nMain Menu".colorize(:blue)
     puts "\n-----------------------".colorize(:blue)
-    puts "You currently have $#{@wallet}".colorize(:blue)
+    puts "You currently have $#{@player.wallet}".colorize(:blue)
     puts "Please select one of the following:".colorize(:blue)
     puts "1)Roulette".colorize(:blue)
     puts "2)Black Jack".colorize(:blue)
@@ -81,6 +79,8 @@ class Casino
       sleep(1)
       display_main_menu
     end
+    print `clear`
+    repeat_menu
   end
 
   
@@ -90,7 +90,7 @@ class Casino
   # allow user to exit the application
   def repeat_menu
     puts "\n-----------------------".colorize(:blue)
-    puts "You currently have $#{@wallet} left.".colorize(:blue)
+    puts "You currently have $#{@player.wallet} left.".colorize(:blue)
     puts "What do you want to do?".colorize(:blue)
     puts "1)Add more money to my wallet".colorize(:blue)
     puts "2)Play another game".colorize(:blue)
@@ -120,8 +120,8 @@ class Casino
     puts "How much more money do you want to add?"
     print "> $"
     new_money = gets.to_i
-    @wallet = @wallet + new_money
-    puts "Your wallet now has: $#{@wallet}"
+    @player.wallet += new_money
+    puts "Your wallet now has: $#{@player.wallet}"
   end
 end
 
