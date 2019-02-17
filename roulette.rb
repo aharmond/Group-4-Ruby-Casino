@@ -1,6 +1,11 @@
 require "pry"
 require "colorize"
 
+# This class allows a user to play a game of roulette and win in-game money
+# Inputs: 
+#      - Player class: Includes @player (name) and @wallet (funds available to use)
+# Outputs:
+#      - Player class: With updated funds based on their performance in the games of roulette
 class Roulette
     attr_accessor :wallet, :player, :roulette_wheel, :bet_array, :winning_number
     
@@ -8,6 +13,8 @@ class Roulette
       @player = player
       @wallet = player.wallet
       @bet_array = []
+
+      # Assembles the necessary data to play a single game of roulette
       build_game_instance
 
       # Choose where you put your chips & your wallet amount
@@ -48,15 +55,15 @@ class Roulette
       # Builds arrays for red and black colors on the roulette table
       @red = [1,3,5,7,9,12,14,16,18,19,21,23,25,27,30,32,34,36]
       @black = [2,4,6,8,10,11,13,15,17,20,22,24,26,28,29,32,33,35]
-      
- 
     end
 
 
     # This method allows the user to enter in their bet
     def place_bets
       @roulette_wheel
-      puts "\n-----------------------"
+      print `clear`
+      puts "Royal".colorize(:blue) + " Roulette".colorize(:yellow)
+      puts "-----------------------"
       puts "Your wallet currently has $#{@wallet}\n".colorize(:blue)
       puts "What do you want to bet on?"
       puts "Your options are: "
@@ -87,7 +94,6 @@ class Roulette
       end
 
       continue_bets # Identifies whether the user wants to keep betting more
-      
     end
 
 
@@ -235,24 +241,29 @@ class Roulette
       puts "\n-----------------------"
       puts "You currently have $#{@wallet} left.".colorize(:blue)
       sleep(1)
-      puts "What would you like to do next?"
-      puts "1) Play Again"
-      puts "2) Cash Out"
-      print "> "
-      choice = gets.to_i
-      case choice
-      when 1
-        sleep(1)
-        initialize(@wallet)
-      when 2
-        puts "Goodbye!"
-        sleep(1)
+      if @wallet <= 0
+        sleep(3)
         cash_out
       else
-        puts "invalid entry, try again"
-        sleep(1)
-        repeat_game
-      end      
+        puts "What would you like to do next?"
+        puts "1) Play Again"
+        puts "2) Cash Out"
+        print "> "
+        choice = gets.to_i
+        case choice
+        when 1
+          sleep(1)
+          initialize(@player)
+        when 2
+          puts "Goodbye!"
+          sleep(1)
+          cash_out
+        else
+          puts "invalid entry, try again"
+          sleep(1)
+          repeat_game
+        end 
+      end     
     end
 
 
