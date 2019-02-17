@@ -1,4 +1,4 @@
-require "pry"
+# require "pry"
 class HorseRaces
 
     def initialize(player)
