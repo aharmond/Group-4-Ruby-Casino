@@ -1,6 +1,11 @@
 require "pry"
 require "colorize"
 
+# This class allows a user to play a game of roulette and win in-game money
+# Inputs: 
+#      - Player class: Includes @player (name) and @wallet (funds available to use)
+# Outputs:
+#      - Player class: With updated funds based on their performance in the games of roulette
 class Roulette
     attr_accessor :wallet, :player, :roulette_wheel, :bet_array, :winning_number
     
@@ -8,6 +13,8 @@ class Roulette
       @player = player
       @wallet = player.wallet
       @bet_array = []
+
+      # Assembles the necessary data to play a single game of roulette
       build_game_instance
 
       # Choose where you put your chips & your wallet amount
@@ -48,8 +55,6 @@ class Roulette
       # Builds arrays for red and black colors on the roulette table
       @red = [1,3,5,7,9,12,14,16,18,19,21,23,25,27,30,32,34,36]
       @black = [2,4,6,8,10,11,13,15,17,20,22,24,26,28,29,32,33,35]
-      
- 
     end
 
 
@@ -87,7 +92,6 @@ class Roulette
       end
 
       continue_bets # Identifies whether the user wants to keep betting more
-      
     end
 
 
