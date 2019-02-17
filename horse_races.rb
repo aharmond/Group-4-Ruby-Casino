@@ -59,14 +59,9 @@ class HorseRaces
             puts "Invalid choice"
             betting
         end
-        if @wallet_horses  > 0
-            puts "Now, how much do you want to bet? Our minimum bet is $1"
-            bet = gets.to_i
-            race(bet)
-        else
-            puts "You don't have enough money to bet"
-            return_to_casino
-        end
+        puts "Now, how much do you want to bet? Our minimum bet is $1"
+        bet = gets.to_i
+        race(bet)
     end
 
     def race(bet)
@@ -79,7 +74,7 @@ class HorseRaces
             sleep(0.5)
         end
         if @selected_horse == @winning_horse
-            @wallet_horses += bet + bet * @odds
+            @wallet_horses += bet * @odds
             puts "You won!"
             puts "You have #{@wallet_horses} left to bet with"
             menu_two
@@ -92,19 +87,24 @@ class HorseRaces
     end
 
     def menu_two 
-            puts "Would you like to"
-            puts "1) Play again"
-            puts "2) Return to casino"
-            choice = gets.strip
-            case choice
-            when "1"
+        puts "Would you like to"
+        puts "1) Play again"
+        puts "2) Return to casino"
+        choice = gets.strip
+        case choice
+        when "1"
+            if @wallet_horses > 0
                 select_horse
-            when "2"
-                return_to_casino
             else
-                puts "Invalid Entry"
-                menu_two
+                puts "You don't have enough money to bet"
+                return_to_casino
             end
+        when "2"
+            return_to_casino
+        else
+            puts "Invalid Entry"
+            menu_two
+        end
     end
 
     def return_to_casino 
