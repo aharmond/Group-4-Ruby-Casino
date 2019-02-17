@@ -51,7 +51,7 @@ class Casino
   # - Constantly display wallet amount, each round of the game
   def display_main_menu
     puts "\nMain Menu".colorize(:blue)
-    puts "\n-----------------------".colorize(:blue)
+    puts "-----------------------".colorize(:blue)
     puts "You currently have $#{@player.wallet}".colorize(:blue)
     puts "Please select one of the following:".colorize(:blue)
     puts "1)Roulette".colorize(:blue)
@@ -111,6 +111,9 @@ class Casino
       sleep(1)
       print `clear`
       exit
+    else
+      puts "Invalid Entry"
+      repeat_menu
     end
   end
 

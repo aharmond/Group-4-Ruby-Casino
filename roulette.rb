@@ -61,7 +61,9 @@ class Roulette
     # This method allows the user to enter in their bet
     def place_bets
       @roulette_wheel
-      puts "\n-----------------------"
+      print `clear`
+      puts "Royal".colorize(:blue) + " Roulette".colorize(:yellow)
+      puts "-----------------------"
       puts "Your wallet currently has $#{@wallet}\n".colorize(:blue)
       puts "What do you want to bet on?"
       puts "Your options are: "
@@ -239,24 +241,29 @@ class Roulette
       puts "\n-----------------------"
       puts "You currently have $#{@wallet} left.".colorize(:blue)
       sleep(1)
-      puts "What would you like to do next?"
-      puts "1) Play Again"
-      puts "2) Cash Out"
-      print "> "
-      choice = gets.to_i
-      case choice
-      when 1
-        sleep(1)
-        initialize(@wallet)
-      when 2
-        puts "Goodbye!"
-        sleep(1)
+      if @wallet <= 0
+        sleep(3)
         cash_out
       else
-        puts "invalid entry, try again"
-        sleep(1)
-        repeat_game
-      end      
+        puts "What would you like to do next?"
+        puts "1) Play Again"
+        puts "2) Cash Out"
+        print "> "
+        choice = gets.to_i
+        case choice
+        when 1
+          sleep(1)
+          initialize(@player)
+        when 2
+          puts "Goodbye!"
+          sleep(1)
+          cash_out
+        else
+          puts "invalid entry, try again"
+          sleep(1)
+          repeat_game
+        end 
+      end     
     end
 
 
