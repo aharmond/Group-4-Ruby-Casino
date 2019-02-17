@@ -78,7 +78,6 @@ class BlackJack
       puts "Are you sure you want to leave BlackJack? (y/n)"
       choice = gets.strip.downcase
       if choice = "y"
-        return
       else
         puts "---"
         bet

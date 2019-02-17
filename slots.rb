@@ -11,30 +11,15 @@ class Slots
     puts "------------------------------------".colorize(:red)
     puts "Welcome to Lucky Money Slot Machine!".colorize(:red)
     puts "1) Start a new game".colorize(:green)
-<<<<<<< HEAD
-    puts "2) Access to wallet".colorize(:green)
-    puts "3) Exit to Main Menu".colorize(:green)
-    puts "4) Quit".colorize(:green)
-=======
     puts "2) Additional Options".colorize(:green)
     puts "3) Quit".colorize(:green)
->>>>>>> abaa332305ede88909e54961f7d329820938a882
     choice = gets.to_i
     case choice
     when 1
       slots_game
     when 2
-<<<<<<< HEAD
-      repeat_menu
-      #Access to wallet to see available budget or add more money
-    when 3
-      display_main_menu
-      # Return to Main Menu
-    when 4
-=======
       return_main_menu
     when 3
->>>>>>> abaa332305ede88909e54961f7d329820938a882
       exit
     else
       puts "Invalid choice. Try again!".colorize(:red)
@@ -50,26 +35,13 @@ class Slots
         puts "You only have $#{@wallet_slots}.".colorize(:red)
         puts "Please choose:".colorize(:red)
         puts "1) Place lower bet".colorize(:green)
-<<<<<<< HEAD
-        puts "2) Access to wallet".colorize(:green)
-        puts "3) Exit to Main Menu".colorize(:green)
-=======
         puts "2) Additional Options".colorize(:green)
->>>>>>> abaa332305ede88909e54961f7d329820938a882
         choice = gets.to_i
         case choice
         when 1
           slots_game
         when 2
-<<<<<<< HEAD
-          repeat_menu
-          #Access to wallet to see available budget or add more money
-        when 3
-          display_main_menu
-          # Return to Main Menu
-=======
           return_main_menu
->>>>>>> abaa332305ede88909e54961f7d329820938a882
         else
           puts "Invalid choice. Try again".colorize(:red)
           slots_menu
@@ -90,12 +62,7 @@ class Slots
     else
       puts "You don't have enough money.".colorize(:red)
       sleep(1)
-<<<<<<< HEAD
-      display_main_menu
-      # Return to Main Menu
-=======
       return_main_menu
->>>>>>> abaa332305ede88909e54961f7d329820938a882
     end
   end
 
@@ -117,33 +84,21 @@ class Slots
     puts "-----------------".colorize(:red)
     puts "Would you like to".colorize(:red)
     puts "1) Play again".colorize(:green)
-<<<<<<< HEAD
-    puts "2) Exit to Main Menu".colorize(:green)
-=======
     puts "2) Additional Options".colorize(:green)
->>>>>>> abaa332305ede88909e54961f7d329820938a882
     choice = gets.to_i
     case choice
       when 1
         slots_game
       when 2
-<<<<<<< HEAD
-        display_main_menu
-        # Return to Main Menu
-=======
         return_main_menu
->>>>>>> abaa332305ede88909e54961f7d329820938a882
       else
         puts "Invalid choice. Try again".colorize(:red)
         slots_menu
     end
   end
 
-<<<<<<< HEAD
-=======
   def return_main_menu
     @player.wallet = @wallet_slots
   end
 
->>>>>>> abaa332305ede88909e54961f7d329820938a882
 end
