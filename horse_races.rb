@@ -4,7 +4,7 @@ class HorseRaces
     def initialize(player)
         @player = player
         @wallet_horses = player.wallet
-        @horses = ["Secratariat", "Man o' War", "California Chrome", "Preakness", "Seattle Slew", "Whirlaway"]  
+        @horse_names = ["Secratariat", "Man o' War", "California Chrome", "Preakness", "Seattle Slew", "Whirlaway", "Lord Murphy", "Vagrant", "Pink Star", "Typhoon II", "Joe Cotton", "Sir Barton", "Thunder Gulch"]  
         puts "Welcome to the Horse Races, #{@player.name}!"
         puts "You have #{@wallet_horses} to bet with today"
         puts 
@@ -29,12 +29,13 @@ class HorseRaces
     def select_horse
         puts "Here are the horses in the upcoming race" 
         puts "Input the number of the horse to select one: "
-        @horses.each_with_index do |horse, index|
+        @racing_horses = @horse_names.sample(6)
+        @racing_horses.each_with_index do |horse, index|
             puts "#{index + 1}) #{horse}"
         end
         choice = gets.to_i
         if choice < 7
-            @selected_horse = @horses[choice - 1]
+            @selected_horse = @racing_horses[choice - 1]
             betting
         else 
             puts "Invalid Choice"
@@ -65,7 +66,7 @@ class HorseRaces
     end
 
     def race(bet)
-        @winning_horse = @horses.sample
+        @winning_horse = @racing_horses.sample
         puts "And they're off!"
         horse_pic =  "🏇"
 
