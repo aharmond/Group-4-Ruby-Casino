@@ -2,10 +2,11 @@ require "pry"
 require "colorize"
 
 class Roulette
-    attr_accessor :wallet, :roulette_wheel, :bet_array, :winning_number
+    attr_accessor :wallet, :player, :roulette_wheel, :bet_array, :winning_number
     
-    def initialize(wallet)
-      @wallet = wallet
+    def initialize(player)
+      @player = player
+      @wallet = player.wallet
       @bet_array = []
       build_game_instance
 
@@ -21,25 +22,30 @@ class Roulette
 
       # Play again or cash out & exit
       repeat_game
-
     end
 
+
+    # Builds the necessary arrays and variables to start a game of roulette
     def build_game_instance
-      @roulette_wheel = (0..36).to_a
-      @roulette_wheel.push("00")
+      @roulette_wheel = (0..36).to_a # Establishes array of possible numbers
+      @roulette_wheel.push("00") # Adds 00
       @roulette_wheel.each_with_index do |number,index|
-          @roulette_wheel[index] = number.to_s
+          @roulette_wheel[index] = number.to_s # converts each number to a string
       end
 
       @bet_options = ["Any Single Number","00","red","black","odd","even","1-18",
         "19-36","1-12","13-24","25-36"]
+
+      # Combines all options into one array, and flattens this array  
       @bet_options.push((0..36).to_a)
       @bet_options.flatten!
-      # binding.pry
+     
+      # Makes sure everything is a string
       @bet_options.each_with_index do |number,index|
         @bet_options[index] = number.to_s
       end
       
+      # Builds arrays for red and black colors on the roulette table
       @red = [1,3,5,7,9,12,14,16,18,19,21,23,25,27,30,32,34,36]
       @black = [2,4,6,8,10,11,13,15,17,20,22,24,26,28,29,32,33,35]
       
@@ -47,13 +53,13 @@ class Roulette
     end
 
 
+    # This method allows the user to enter in their bet
     def place_bets
       @roulette_wheel
       puts "\n-----------------------"
       puts "Your wallet currently has $#{@wallet}\n".colorize(:blue)
       puts "What do you want to bet on?"
       puts "Your options are: "
-      # binding.pry
 
       # Loop through and print bet options
       i = 0
@@ -78,6 +84,7 @@ class Roulette
       else # Saves the bet, and withdraws funds from wallet
         @bet_array.push(Bet.new(bet_option,bet_amount))
         @wallet -= bet_amount
+        binding.pry
       end
 
       continue_bets # Identifies whether the user wants to keep betting more
@@ -85,7 +92,7 @@ class Roulette
     end
 
 
-
+    # Allows user to loop through and add another bet if they still have money
     def continue_bets
       puts "Do you want to bet anything else? (y/n)"
       choice = gets.strip.downcase
@@ -103,11 +110,11 @@ class Roulette
     end
   
 
-    # Allows user to spin the wheel
+    # Allows user to spin the wheel and returns the winning number
     def spin_the_wheel
       puts "\n-----------------------"
       puts "To spin the wheel, press 'Enter'"
-      # print "> "
+      print "> "
       choice = gets.to_s
       if choice == "\n"
         @winning_number = roulette_wheel.sample
@@ -118,11 +125,10 @@ class Roulette
         puts "Invalid, try again"
         spin_the_wheel
       end
-      # binding.pry
-      #TBD
-
     end
 
+
+    # Simple output to show that the wheel is "turning"
     def spin_loop(number_of_iterations)
       for i in 1..number_of_iterations do
         puts "."
@@ -131,20 +137,21 @@ class Roulette
     end
 
 
-    # Calculates the winnings of the spin based on the user's bets
+    # Calculates the winnings of the spin based on the user's series of bets
     def calculate_winnings
       # Calculate numbers
       winnings_amount = 0
       bet_lost_flag = true
 
-      #check whether the number is 
-      @bet_array.each_with_index do |bet,index|
+      @bet_array.each_with_index do |bet,index| 
+        # Checks whether the user bet on a single number, and that number won
         if bet.bet_option == @winning_number
           winnings_amount += bet.bet_amount * 34
           puts "Winning number is #{winning_number}, you won!".colorize(String.colors.sample)
           bet_lost_flag = false
         end
 
+        # Checks whether any of the other bets won
         case bet.bet_option
         when "even"
           if @winning_number.to_i % 2 == 0
@@ -201,31 +208,29 @@ class Roulette
             bet_lost_flag = false
           end
         end
-
       end
 
-      
+      # Finally, check whether the user did not win at all
+      # If the user did not win, then the bet_lost_flag will have remained true
       if bet_lost_flag
         puts "Sorry, you did not win anything!"
       else
         puts "For this game, you won $#{winnings_amount}!".colorize(String.colors.sample)
       end
-
       sleep(1)
 
       # Adds winnings to user's wallet
       add_winnings(winnings_amount)
-
     end
 
 
-
+    # This method adds the winnings of a single game, to the user's wallet
     def add_winnings(winnings_amount)
       @wallet += winnings_amount
     end
 
 
-
+    # Allows the user to play again, or exit
     def repeat_game
       sleep(1)
       puts "\n-----------------------"
@@ -252,10 +257,12 @@ class Roulette
     end
 
 
-    # Allows user to cash out and exit the game
+    # Cashes user out and exits the game
     def cash_out
       # puts @wallet
-      return @wallet
+      binding.pry
+      player.wallet = @wallet
+      binding.pry
     end
   end
 
@@ -277,5 +284,5 @@ class Bet
   end
 end
 
-
-Roulette.new(10)
+# DEBUG
+# Roulette.new(10)
