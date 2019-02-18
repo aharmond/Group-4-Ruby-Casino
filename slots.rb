@@ -8,6 +8,7 @@ class Slots
     slots_menu
   end
   def slots_menu
+    puts `clear`
     puts "               .               ..       .       .   .             .".colorize(:green)
     puts " .      .     T h i s   i s   t h e   g a l a x y   o f   . . .             .".colorize(:green)
     puts "                     .              .       .                    .      .".colorize(:green)
