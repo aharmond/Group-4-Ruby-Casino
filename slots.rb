@@ -8,9 +8,31 @@ class Slots
     slots_menu
   end
   def slots_menu
+    puts "               .               ..       .       .   .             .".colorize(:green)
+    puts " .      .     T h i s   i s   t h e   g a l a x y   o f   . . .             .".colorize(:green)
+    puts "                     .              .       .                    .      .".colorize(:green)
+    puts "               _________________      ____         __________".colorize(:green)
+    puts " .       .    X                 |    X    X    .  |          X ".colorize(:green)
+    puts "     .       X    ______   _____| . X      X      |    ___    |     .     .".colorize(:green)
+    puts "             X    X    |   |       X   XX   X     |   |___>   |".colorize(:green)
+    puts "           .  X    X   |   |      X   X__X   X  . |         _X               .".colorize(:green)
+    puts " .     ________>    |  |   | .   X            X   |   |X    X_______    .".colorize(:green)
+    puts "      |            X   |   |    X    ______    X  |   | X           |".colorize(:green)
+    puts "      |___________X    |___|   X____X      X____X |___|  X__________|    .".colorize(:green)
+    puts "  .     ____    __  . _____   ____      .  __________   .  _________".colorize(:green)
+    puts "       X    X  X  X  X    X  X    X       |          X    X         |      .".colorize(:green)
+    puts "        X    XX    XX    X  X      X      |    ___    |  X    ______|  .".colorize(:green)
+    puts "         X              X  X   XX   X .   |   |___>   |  X    X ".colorize(:green)
+    puts "   .      X            X  X   X__X   X    |         _X.   X    X            +".colorize(:green)
+    puts "           X    XX    X  X            X   |   |X    X______>    |   .".colorize(:green)
+    puts "            X  X  X  X  X    ______    X  |   | X              X          .".colorize(:green)
+    puts " .       .   XX    XX  X____X      X____X |___|  X____________X  LS".colorize(:green)
+    puts "                               .                                        .".colorize(:green)
+    puts "     .                           .         .               .                 .".colorize(:green)
+    sleep(5)
     puts `clear`
     puts "------------------------------------".colorize(:red)
-    puts "Welcome to Jedi Academy Slot Machine!".colorize(:red)
+    puts "WELCOME TO JEDI ACADEMY SLOT MACHINE!".colorize(:red)
     puts "1) Start a new game".colorize(:green)
     puts "2) Additional Options".colorize(:green)
     puts "3) Quit".colorize(:green)
@@ -23,6 +45,10 @@ class Slots
       puts `clear`
       return_main_menu
     when 3
+      puts `clear`
+      puts "<(-_-)> May the Force be with you.".colorize(:green)
+      sleep(3)
+      puts `clear`
       exit
     else
       puts "Invalid choice. Try again!".colorize(:red)
@@ -34,8 +60,10 @@ class Slots
 
   def slots_game
     if @wallet_slots > 0
-      puts "You have $#{@wallet_slots}.".colorize(:green)
-      puts "Place your bet (min $1): ".colorize(:green)
+      puts "<(-_-)> The fear of loss is a path to the Dark Side.".colorize(:green)
+      sleep(2)
+      puts "You have $#{@wallet_slots}.".colorize(:red)
+      puts "Place your bet (min $1): ".colorize(:red)
       @slots_bet = gets.to_i
       if @slots_bet > @wallet_slots
         puts "You only have $#{@wallet_slots}.".colorize(:red)
@@ -58,10 +86,10 @@ class Slots
         end
       else
         puts "Spinning...".colorize(:blue)
-        sleep(1)
+        sleep(2)
         puts "Still spinning...".colorize(:blue)
         sleep(2)
-        puts "Patience you must have, my young Padawan!".colorize(:blue)
+        puts "<(-_-)> PATIENCE YOU MUST HAVE my young padawan!".colorize(:green)
         sleep(3)
         puts result = rand(1..30).to_i
         sleep(2)
@@ -82,16 +110,24 @@ class Slots
 
   def win
     @wallet_slots += @slots_bet * 3
-    puts "YOU WIN!".colorize(:green)
-    puts "Your wallet now has $#{@wallet_slots}.".colorize(:green)
-    puts "Congrats!".colorize(:green)
+    puts "YOU WIN!!!".colorize(:red)
+    sleep(2)
+    puts "<(-_-)> If you end your training now,".colorize(:green)
+    sleep(2)
+    puts "if you choose the quick and easy path as Vader did,".colorize(:green)
+    sleep(2)
+    puts "you will become an agent of evil.".colorize(:green)
+    sleep(2)
+    puts "Your wallet now has $#{@wallet_slots}.".colorize(:red)
   end
 
   def lose
     @wallet_slots -= @slots_bet
-    puts "YOU LOSE!".colorize(:green)
-    puts "Your wallet now has $#{@wallet_slots}.".colorize(:green)
-    puts "Better luck next time!".colorize(:green)
+    puts "YOU LOSE!!!".colorize(:red)
+    sleep(2)
+    puts "<(-_-)> The greatest teacher, failure is.".colorize(:green)
+    sleep(2)
+    puts "Your wallet now has $#{@wallet_slots}.".colorize(:red)
   end
 
   def sub_menu
