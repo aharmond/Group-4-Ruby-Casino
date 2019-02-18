@@ -104,6 +104,7 @@ class BlackJack
     end
 
     def back_tomenu
+      player.wallet = @bjmoney
       puts "Are you sure you want to leave BlackJack?"
       puts "1) Yes".colorize(:green)
       puts "2) No".colorize(:red)
