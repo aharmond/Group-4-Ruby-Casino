@@ -63,7 +63,7 @@ class Slots
   def slots_game
     if @wallet_slots > 0
       puts "<(-_-)> The fear of loss is a path to the Dark Side.".colorize(:green)
-      sleep(2)
+      sleep(1)
       puts "You have $#{@wallet_slots}.".colorize(:red)
       puts "Place your bet (min $1): ".colorize(:red)
       @slots_bet = gets.to_i
@@ -86,21 +86,25 @@ class Slots
           puts `clear`
           slots_menu
         end
+      elsif @slots_bet == 0
+        puts "The minimum must be $1. Try again.".colorize(:red)
+        slots_game
       else
+        sleep(1)
         puts "Spinning...".colorize(:blue)
         sleep(2)
         puts "Still spinning...".colorize(:blue)
         sleep(2)
         puts "<(-_-)> PATIENCE YOU MUST HAVE my young padawan!".colorize(:green)
-        sleep(3)
-        puts result = rand(1..30).to_i
         sleep(2)
-        if result == 19
-          win
+        reel_spinning
+        sleep(2)
+        if @result1 == @result2
+          possible_win
         else
           lose
         end
-        sleep(2)
+        sleep(1)
         sub_menu
       end
     else
@@ -108,6 +112,21 @@ class Slots
       sleep(1)
       return_main_menu
     end
+  end
+
+  def possible_win
+    if @result1 == @result3
+      win
+    else
+      lose
+    end
+  end
+
+  def reel_spinning
+    @result1 = rand(1..5).to_i
+    @result2 = rand(1..5).to_i
+    @result3 = rand(1..5).to_i
+    puts "Your reels landed on #{@result1} - #{@result2} - #{@result3}.".colorize(:yellow)
   end
 
   def win
