@@ -7,7 +7,7 @@ class BlackJack
   end
 
   def bet
-    puts "Welcome to BlackJack #{@player.name}"
+    puts "Welcome to BlackJack #{@player.name}".colorize(:yellow)
     puts "You have #{@bjmoney} dollars"
     puts "How much would you like to bet? (or bet 0 to return to games menu)"
     @bet = gets.to_i
@@ -16,8 +16,8 @@ class BlackJack
       back_tomenu
     elsif
       @bet > @bjmoney
-      puts "You don't have enough money"
-      puts "---"
+      puts "You don't have enough money".colorize(:red)
+      puts "---".colorize(:green)
       bet
     else 
       game_start
@@ -31,10 +31,11 @@ class BlackJack
   end
   
   def game
+    puts "---".colorize(:green)
     puts "The dealer's total of flipped cards is:"
-    puts @dealerrunning
+    puts "#{@dealerrunning}".colorize(:cyan)
     puts "Your total of flipped cards is:"
-    puts @playerrunning
+    puts "#{@playerrunning}".colorize(:cyan)
     puts "Would you like to add a card (y/n)?"
     newcard = gets.strip.downcase
     if 
@@ -54,29 +55,31 @@ class BlackJack
     else
     end
     case
+    when finalnumber == finalnumberd
+      puts "Tie".colorize(:yellow)
+      bet
     when finalnumber == 21
-      puts "YOU WIN!!!"
+      puts "YOU WIN!!!".colorize(:green)
         @bjmoney = @bjmoney + @bet
         bet
       when finalnumber > 21
-        puts "YOU LOSE!"
+        puts "YOU LOSE!".colorize(:red)
         @bjmoney = @bjmoney - @bet
         bet
       when finalnumberd > 21
-        puts "YOU WIN!!!"
+        puts "YOU WIN!!!".colorize(:green)
         @bjmoney = @bjmoney + @bet
         bet
       when finalnumberd > finalnumber
-        puts "YOU LOSE!"
+        puts "YOU LOSE!".colorize(:red)
         @bjmoney = @bjmoney - @bet
         bet
       when finalnumber > finalnumberd
-        puts "YOU WIN!!!"
+        puts "YOU WIN!!!".colorize(:green)
         @bjmoney = @bjmoney + @bet
         bet
       else
       end
-      bet
     end
 
     def hit
@@ -93,7 +96,7 @@ class BlackJack
     def dealerhit
       if finalnumberd < finalnumber
         finalnumberd = finalnumberd + rand(1..11)
-        puts "The dealer turned over 1 more card"
+        puts "The dealer turned over 1 more card".colorize(:cyan)
         puts finalnumberd
         dealerhit
       else
@@ -102,96 +105,21 @@ class BlackJack
 
     def back_tomenu
       puts "Are you sure you want to leave BlackJack?"
-      puts "1) Yes"
-      puts "2) No"
+      puts "1) Yes".colorize(:green)
+      puts "2) No".colorize(:red)
       choice = gets.to_i
       if choice == 1
-        puts "Thank you for playing"
+        puts "Thank you for playing!".colorize(:green)
         sleep(1)
       elsif choice == 2
-        puts "---"
+        puts "---".colorize(:yellow)
         bet
       else
-        puts "Invalid selection"
+        puts "Invalid selection".colorize(:red)
         back_tomenu
       end
 
     end
 
-    
-end
-   # if 
-   #   @bet == 0
-   #   exit
-   # else
-   #   game
-   # end
   
-
-
-  # puts "Do you want to add another card (type y or n)"
- # choice = gets.strip.downcase
- # if 
- #   choice == "y"
- #    @dealerrunning.push(rand(1..10))
- #    puts sum(@dealerrunning)
- #    @playerrunning.push(rand(1..10))
- #    puts sum(@playerrunning)
- # else
- #   exit
-
-
-  #def @playercardtotal
-  #end
-
-  #def dealer
-    #puts "The dealer puts a #{} on the table"
-    #if 
-     # card > 21
-     # playerwin
-    #else
-      
-
-  #end
-
-  #def playerwin
-  #end
-
-  #def playerlose
-  #end
-
-
-  #case newtotal
-  #when == 21
-  #  playerlose
-  #when > 21
-  #  playerwin
-  #when 
-
-
- # def @dealercardtotal
-   # total = rand(1..10)
-   # newtotal = total + rand(1..10)
-  #  case newtotal
- #   when == 21
-#      playerlose
-    #when > 21
-   #   playerwin
-  #  when 
-
- # end
-#end
-#@dealerrunning = []
-#@playerrunning = []
-
-#scoring
-    #if 
-    #  @dealerrunning == true
-    #  puts "playerlose"
-    #else
-    #end
-    #if
-    #  @dealerrunning = true
-    #  puts "playerwin"
-    #else
-    #end
+end
