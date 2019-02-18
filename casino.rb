@@ -38,7 +38,7 @@ class Casino
     print "> $"
     @wallet = gets.to_i
     @player = Player.new(@name, @wallet)
-    puts "\nGreat, let's get started!"
+    puts "\nGreat, let's get started!".colorize(:yellow)
 
     sleep(1)
   end

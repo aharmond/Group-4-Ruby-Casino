@@ -30,7 +30,7 @@ class Slots
     puts " .       .   XX    XX  X____X      X____X |___|  X____________X  LS".colorize(:green)
     puts "                               .                                        .".colorize(:green)
     puts "     .                           .         .               .                 .".colorize(:green)
-    sleep(4)
+    sleep(3)
     puts `clear`
     puts "------------------------------------".colorize(:red)
     puts "Hello #{@player.name}!".colorize(:red)
@@ -147,7 +147,7 @@ class Slots
     puts "YOU LOSE!!!".colorize(:red)
     sleep(1)
     puts "<(-_-)> The greatest teacher, failure is.".colorize(:green)
-    sleep(2)
+    sleep(1)
     puts "Your wallet now has $#{@wallet_slots}.".colorize(:red)
   end
 
