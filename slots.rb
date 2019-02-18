@@ -29,9 +29,10 @@ class Slots
     puts " .       .   XX    XX  X____X      X____X |___|  X____________X  LS".colorize(:green)
     puts "                               .                                        .".colorize(:green)
     puts "     .                           .         .               .                 .".colorize(:green)
-    sleep(5)
+    sleep(4)
     puts `clear`
     puts "------------------------------------".colorize(:red)
+    puts "Hello #{@player.name}!".colorize(:red)
     puts "WELCOME TO JEDI ACADEMY SLOT MACHINE!".colorize(:red)
     puts "1) Start a new game".colorize(:green)
     puts "2) Additional Options".colorize(:green)
@@ -111,7 +112,7 @@ class Slots
   def win
     @wallet_slots += @slots_bet * 3
     puts "YOU WIN!!!".colorize(:red)
-    sleep(2)
+    sleep(1)
     puts "<(-_-)> If you end your training now,".colorize(:green)
     sleep(2)
     puts "if you choose the quick and easy path as Vader did,".colorize(:green)
@@ -124,7 +125,7 @@ class Slots
   def lose
     @wallet_slots -= @slots_bet
     puts "YOU LOSE!!!".colorize(:red)
-    sleep(2)
+    sleep(1)
     puts "<(-_-)> The greatest teacher, failure is.".colorize(:green)
     sleep(2)
     puts "Your wallet now has $#{@wallet_slots}.".colorize(:red)

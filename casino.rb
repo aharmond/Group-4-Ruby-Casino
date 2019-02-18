@@ -30,11 +30,11 @@ class Casino
 
   #
   def get_user_input
-    puts "Welcome to Money City!"
-    puts "What is your name?"
+    puts "Welcome to Money City!".colorize(:red)
+    puts "What is your name?".colorize(:blue)
     print "> "
     @name = gets.strip
-    puts "How much money do you want to add to your wallet today?"
+    puts "How much money do you want to add to your wallet today?".colorize(:blue)
     print "> $"
     @wallet = gets.to_i
     @player = Player.new(@name, @wallet)
@@ -50,10 +50,10 @@ class Casino
   # - Minimum bet is $1
   # - Constantly display wallet amount, each round of the game
   def display_main_menu
-    puts "\nMain Menu".colorize(:blue)
+    puts "\nMain Menu".colorize(:red)
     puts "-----------------------".colorize(:blue)
-    puts "You currently have $#{@player.wallet}".colorize(:blue)
-    puts "Please select one of the following:".colorize(:blue)
+    puts "You currently have $#{@player.wallet}".colorize(:red)
+    puts "Please select one of the following:".colorize(:red)
     puts "1)Roulette".colorize(:blue)
     puts "2)Black Jack".colorize(:blue)
     puts "3)Slots".colorize(:blue)
@@ -77,7 +77,7 @@ class Casino
     when 6
       repeat_menu
     else
-      puts "Invalid input, try again."
+      puts "Invalid input, try again.".colorize(:red)
       sleep(1)
       display_main_menu
     end
@@ -92,8 +92,8 @@ class Casino
   # allow user to exit the application
   def repeat_menu
     puts "\n-----------------------".colorize(:blue)
-    puts "You currently have $#{@player.wallet} left.".colorize(:blue)
-    puts "What do you want to do?".colorize(:blue)
+    puts "You currently have $#{@player.wallet} left.".colorize(:red)
+    puts "What do you want to do?".colorize(:red)
     puts "1)Add more money to my wallet".colorize(:blue)
     puts "2)Play another game".colorize(:blue)
     puts "3)Exit".colorize(:blue)
@@ -107,12 +107,12 @@ class Casino
     when 2
       display_main_menu
     when 3
-      puts "\nGoodbye!"
+      puts "\nGOOD BYE!!!".colorize(:red)
       sleep(1)
       print `clear`
       exit
     else
-      puts "Invalid Entry"
+      puts "Invalid Entry".colorize(:red)
       repeat_menu
     end
   end
@@ -121,12 +121,12 @@ class Casino
   # Allows the user to add any amount of money (integer)
   # to their wallet for future games.
   def add_money_to_wallet
-    puts "\n-----------------------"
-    puts "How much more money do you want to add?"
+    puts "\n-----------------------".colorize(:blue)
+    puts "How much more money do you want to add?".colorize(:red)
     print "> $"
     new_money = gets.to_i
     @player.wallet += new_money
-    puts "Your wallet now has: $#{@player.wallet}"
+    puts "Your wallet now has: $#{@player.wallet}".colorize(:blue)
   end
 end
 
