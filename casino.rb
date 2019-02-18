@@ -30,6 +30,13 @@ class Casino
 
   #
   def get_user_input
+    puts "          .-------.    ______"
+    puts "         /   o   /|   /\\     \\"
+    puts "        /_______/o|  /o \\  o  \\"
+    puts "        | o     | | /   o\\_____\\"
+    puts "        |   o   |o/ \\o   /o    /"
+    puts "        |     o |/   \\ o/  o  /"
+    puts "        '-------'     \\/____o/"
     puts "Welcome to Money City!"
     puts "What is your name?"
     print "> "
