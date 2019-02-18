@@ -1,4 +1,4 @@
-# require "pry"
+require "pry"
 class HorseRaces
 
     def initialize(player)
@@ -103,16 +103,16 @@ class HorseRaces
         puts "2) Return to casino".colorize(:blue)
         puts "-----------------------".colorize(:blue)
         print "> "
-        choice = gets.strip
+        choice = gets.strip.to_i
         case choice
-        when "1"
+        when 1
             if @wallet_horses > 0
                 select_horse
             else
                 puts "You don't have enough money to bet"
                 return_to_casino
             end
-        when "2"
+        when 2
             return_to_casino
         else
             puts "Invalid Entry"
